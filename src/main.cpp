@@ -15,11 +15,16 @@ int main() {
         {
             count++;
         }
-        else if (bn::keypad::a_pressed())
+        else if (bn::keypad::a_held() && bn::keypad::b_held()) 
+        {
+            bn::backdrop::set_color((bn::color(28, 28, 28)));
+            count = 0;
+        }
+        else if (bn::keypad::a_held())
         {
             bn::backdrop::set_color((bn::color(16, 0, 14)));
             count = 0;
-        } else if (bn::keypad::b_pressed())
+        } else if (bn::keypad::b_held())
         {
             bn::backdrop::set_color((bn::color(28, 5, 26)));
             count = 0;
