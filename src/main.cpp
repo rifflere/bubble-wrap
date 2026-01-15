@@ -26,7 +26,8 @@ int main() {
 
     for(int x = -40; x <= 40; x += 20) 
     {
-        circles.push_back(bn::sprite_items::dot.create_sprite(x, 40));
+        circles.push_back(bn::sprite_items::dot.create_sprite(x, x));
+        circles.push_back(bn::sprite_items::dot.create_sprite(-x, x));
     }
 
     while(true)
