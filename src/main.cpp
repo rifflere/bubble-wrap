@@ -13,6 +13,9 @@ int main() {
         if (bn::keypad::a_pressed())
         {
             bn::backdrop::set_color((bn::color(16, 0, 14)));
+        } else if (bn::keypad::b_pressed())
+        {
+            bn::backdrop::set_color((bn::color(28, 5, 26)));
         }
 
         bn::core::update();
