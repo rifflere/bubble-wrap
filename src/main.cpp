@@ -6,6 +6,7 @@
 #include <bn_vector.h>
 #include <bn_sprite_ptr.h>
 #include <bn_sprite_items_dot.h>
+#include <bn_sprite_items_lil.h>
 
 int main() {
     bn::core::init();
@@ -29,6 +30,8 @@ int main() {
         circles.push_back(bn::sprite_items::dot.create_sprite(x, x));
         circles.push_back(bn::sprite_items::dot.create_sprite(-x, x));
     }
+
+    bn::sprite_ptr lil = bn::sprite_items::lil.create_sprite(-65, 65);
 
     while(true)
     {
