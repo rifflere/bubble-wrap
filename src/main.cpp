@@ -8,21 +8,16 @@
 #include <bn_sprite_items_dot.h>
 #include <bn_sprite_items_lil.h>
 
+#define FLOOR (80 - 4)
+
 int main() {
     bn::core::init();
 
+    // Create background
     bn::backdrop::set_color((bn::color(22, 5, 20)));
     int count = 60;
 
-    // bn::sprite_ptr dot_01 = bn::sprite_items::dot.create_sprite(-50, -50);
-    // bn::sprite_ptr dot_02 = bn::sprite_items::dot.create_sprite(-50, -25);
-    // bn::sprite_ptr dot_03 = bn::sprite_items::dot.create_sprite(-50, 0);
-    // bn::sprite_ptr dot_04 = bn::sprite_items::dot.create_sprite(-50, 25);
-    // bn::sprite_ptr dot_05 = bn::sprite_items::dot.create_sprite(-50, -50);
-    // bn::sprite_ptr dot_06 = bn::sprite_items::dot.create_sprite(-25, -50);
-    // bn::sprite_ptr dot_07 = bn::sprite_items::dot.create_sprite(0, -50);
-    // bn::sprite_ptr dot_08 = bn::sprite_items::dot.create_sprite(25, -50);
-
+    // Add circles
     bn::vector<bn::sprite_ptr, 10> circles = {};
 
     for(int x = -40; x <= 40; x += 20) 
@@ -31,10 +26,42 @@ int main() {
         circles.push_back(bn::sprite_items::dot.create_sprite(-x, x));
     }
 
+    // Add character
     bn::sprite_ptr lil = bn::sprite_items::lil.create_sprite(-65, 65);
 
-    while(true)
+    // Establish physics
+    bn::fixed speed = 1.0;
+    bn::fixed dy = 0;
+    bn::fixed gravity = 0.03;
+    bn::fixed jump_strength = 1;
+
+    while (true)
     {
+        // Handle character movement
+        if (bn::keypad::left_held())
+        {
+            lil.set_x(lil.x() - speed);
+        }
+        if (bn::keypad::right_held())
+        {
+            lil.set_x(lil.x() + speed);
+        }
+        if (bn::keypad::up_pressed())
+        {
+            dy -= jump_strength;
+        }
+
+        dy += gravity;
+
+        lil.set_y(lil.y() + dy);
+
+        if (lil.y() > FLOOR)
+        {
+            lil.set_y(FLOOR);
+            dy = 0;
+        }
+
+        // Handle background color change
         if (count < 60)
         {
             count++;
