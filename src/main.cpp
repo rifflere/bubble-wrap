@@ -8,7 +8,7 @@
 #include <bn_sprite_items_dot.h>
 #include <bn_sprite_items_lil.h>
 
-#define FLOOR (80 - 4)
+#define FLOOR (80 - 16)
 
 int main() {
     bn::core::init();
